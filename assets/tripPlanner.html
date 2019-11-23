@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	#container{
+		border:solid 1px black;
+		display:none;
+	}
+	#container2{
+		border:solid 1px black;
+		display:none;
+	}
+	.placename:hover{
+		background-Color:grey;
+		cursor:none;
+	}
+	</style>
+	<title>Planner</title>
+
+	<!-- Link to the jQuery Library -->
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+  	<!-- Link to Firebase and Firebase UI -->
+  	<!--<script src="https://www.gstatic.com/firebasejs/live/3.6/firebase.js"></script>
+    <script src="js/config.js"></script>-
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>-->
+
+	<!-- Links to CSS Stylesheets -->
+	<!--<link rel="stylesheet" href="css/reset.css">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<!--<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />-->
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<div class="container header"> <!-- Main Container -->
+
+		<div class="row black padding no-margin-bottom" id="title">
+			<h1>ROAD TRIP PLANNER</h1>
+		</div>
+
+		<div class="divider"> </div>
+
+		<div class="row black padding" id="instructions">
+			<h5> Tell us where you want to go! :D <br> Then click along your route to see current gas prices along the way! </h5>
+		</div>
+
+		<div class="divider"> </div>
+
+		<div class="row noPad">
+
+			<div class="col s12 m4"> <!-- Left Side -->
+				<form class="border"> <!-- Trip Form -->
+					<div id="tripInfo" class="padding"> <!-- Trip Info -->
+						<h5 class="black">PLEASE ENTER TRIP DETAILS</h5>
+
+						<label for="tripName">Trip Name</label>
+						<input placeholder="Name your trip" id="tripName" name="tripName" type="text" class="">
+
+						<label for="start_date">Start Date</label>
+						<input type="date" id="startDate" class="datepicker">
+
+						<label for="end_date">End Date</label>
+						<input type="date" id="endDate" class="datepicker">
+
+						<label for="origin">Origin City</label>
+						<input placeholder="" id="origin" type="text" class="" onkeypress="obj.getTerm()">
+						<tr><td></td><td><div id = "container"/></div></td></tr>
+
+						<label for="destination">Destination</label>
+			       <input placeholder="" id="destination" type="text" class="" onkeypress="obj.getTerm2()">
+						 <tr><td></td><td><div id = "container2"/></div></td></tr>
+
+					</div> <!-- End Trip Info -->
+
+					<h5 class="black">CAR INFO</h5>
+					<div id="carInfo" class="padding"> <!-- Car Info -->
+						<label for="mpg">Desired Mileage</label>
+				        <input placeholder="" id="mpg" type="text" class="">
+					</div> <!-- End Car Info -->
+
+					<br><br>
+
+					<div id="submit" class="btn button-right"> <!-- Submit Button -->
+						<span>Submit</span>
+	      			</div> <!-- End Submit Button -->
+				</form> <!-- End Trip Form -->
+			</div> <!-- End Left Side -->
+
+			<div class="col s12 m8"> <!-- Right Side -->
+				<div id="right-side">
+					<h5 id="tripNameLabel" class="black"></h5>
+					<div id="map" class="border" style="width:100%;height:500px"></div>
+
+					<div> <!-- Gas Station Table -->
+						<table class="border centered marginTop">
+	        				<thead class="black">
+	          					<tr>
+	          	  					<th data-field="station">STATION</th>
+						            <th data-field="address">ADDRESS</th>
+						            <th data-field="city">CITY</th>
+						            <th data-field="gasPrice">GAS PRICE</th>
+						        </tr>
+	        				</thead>
+
+	        				<tbody id="output"></tbody>
+	       				</table>
+	       			</div> <!-- End Gas Station Table -->
+				</div>
+			</div> <!-- End Right Side -->
+
+		</div>
+
+		<div class="row marginTop noPad"> <!-- Gas Cost Estimate -->
+			<div class="col s12">
+				<div class="border">
+					<h5 class="black"> FUEL COST ESTIMATE </h5>
+					<h4 id="estimate" class="center">Rs. </h4>
+					<p class="padding emphasis border"> * Please note: This is only a rough approximation of the cost of your trip based on recent gas prices. You may wish to do your own calculations in order to ensure accuracy in budgeting! </p>
+				</div>
+			</div>
+		</div> <!-- End Gas Cost Estimate -->
+
+		<div class="row marginTop noPad">
+			<div class="col s12 m6"> <!-- Hotel Suggestion -->
+				<div class="border">
+					<h5 class="black"> NEED A HOTEL? </h5>
+					<div id="hotelInfo"> </div>
+					<br> <br>
+					<div id="hotwireInfo" class="center">
+						Click Here!
+						<br>
+						<img id="hotelimg" width="30" height="30" src="images/hotel.jpeg">
+					</div>
+				</div>
+			</div> <!-- End Hotel Suggestion -->
+
+			<div class="col s12 m6" id="savedTrips"> <!-- Saved Trips Panel -->
+				<div class="border">
+					<h5 class="black"> SAVED TRIPS </h5>
+
+					<div id="tripsList"> <!-- Trips Table -->
+						<table class="border centered marginTop">
+	        				<thead class="black" id="trips-table-header">
+	          					<tr>
+	          	  				<th data-field="station">TRIP</th>
+						            <th data-field="address">START DATE</th>
+						            <th data-field="city">END DATE</th>
+						            <th data-field="gasPrice">ORIGIN</th>
+						            <th data-field="gasPrice">DESTINATION</th>
+						        </tr>
+	        				</thead>
+
+	        				<tbody id="trips-table-body"></tbody>
+	       				</table>
+	       			</div> <!-- End Trips Table -->
+
+					<div id="save-current-trip" class="center btn button-right"> <!-- Save Current Trip Button -->
+	        			<span>SAVE CURRENT TRIP!</span>
+	        		</div> <!-- End Save Current Trip Button -->
+				</div>
+			</div> <!-- End Saved Trips Panel -->
+		</div>
+
+	</div> <!-- End Main Container -->
+
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	<script>
+		$('.datepicker').pickadate({
+		    selectMonths: true, // Creates a dropdown to control month
+		    selectYears: 15 // Creates a dropdown of 15 years to control year
+		  });
+
+			function Suggest(){
+				object=this;
+				this.search=null;
+				this.timer=null;
+				this.url=null;
+				this.xhr=new XMLHttpRequest();
+				this.container=null;
+
+				this.getTerm=function(){
+					if(this.timer)
+					{
+						clearTimeout(this.timer);
+					}
+					this.timer=setTimeout(this.sendTerm, 1000);
+				}
+				this.sendTerm=function(){
+					object.search=document.getElementById("origin");
+					var term=object.search.value;
+					console.log("Sending "+term);
+
+					object.url="/trip-planner-group-project-master/assets/suggest.php?term="+term;
+					object.xhr.onreadystatechange=object.showResult;
+					object.xhr.open("GET", object.url, true);
+					object.xhr.send();
+				}
+
+				this.showResult=function()
+				{
+					if(this.readyState==4 && this.status==200){
+						var res=this.responseText;
+						console.log(res);
+						var resJSON=JSON.parse(res);
+						if(resJSON.length==0){
+							//object.search.value="No result found";
+					}
+					else{
+						object.populatePlace(resJSON);
+					}
+				}
+			}
+				this.populatePlace=function(resO){
+					var origin=document.getElementById("origin");
+					object.container=document.getElementById("container");
+					object.container.innerHTML="";
+					for(f in resO){
+						var itemdiv=document.createElement("div");
+						itemdiv.className="placename";
+						itemdiv.innerHTML=resO[f];
+						itemdiv.onclick=function(){
+							origin.value=this.innerHTML;
+							object.container.style.display="none";
+						}
+						object.container.appendChild(itemdiv);
+					}
+					object.container.style.display="block";
+				}
+//
+//
+//
+//
+
+				this.getTerm2=function(){
+					if(this.timer)
+					{
+						clearTimeout(this.timer);
+					}
+					this.timer=setTimeout(this.sendTerm2, 1000);
+				}
+				this.sendTerm2=function(){
+					object.search=document.getElementById("destination");
+					var term=object.search.value;
+					console.log("Sending "+term);
+
+					object.url="/trip-planner-group-project-master/assets/suggest.php?term="+term;
+					object.xhr.onreadystatechange=object.showResult2;
+					object.xhr.open("GET", object.url, true);
+					object.xhr.send();
+				}
+
+				this.showResult2=function()
+				{
+					if(this.readyState==4 && this.status==200){
+						var res=this.responseText;
+						console.log(res);
+						var resJSON=JSON.parse(res);
+						if(resJSON.length==0){
+						//	object.search.value="No result found";
+					}
+					else{
+						object.populatePlace2(resJSON);
+					}
+				}
+			}
+				this.populatePlace2=function(resO){
+					var origin=document.getElementById("destination");
+					object.container=document.getElementById("container2");
+					object.container.innerHTML="";
+					for(f in resO){
+						var itemdiv=document.createElement("div");
+						itemdiv.className="placename";
+						itemdiv.innerHTML=resO[f];
+						itemdiv.onclick=function(){
+							origin.value=this.innerHTML;
+							object.container.style.display="none";
+						}
+						object.container.appendChild(itemdiv);
+					}
+					object.container.style.display="block";
+				}
+			}
+
+			var obj=new Suggest();
+	</script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBvVl27lo8-KOTnl9BnzaizFeWyIZVNblM"></script>-->
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyClWF3mmliTe-JldccjUJhpsc220W9hRIE"></script>
+	<script type="text/javascript" src="js/mapCode.js"></script>
+</body>
+
+<br> <br> <br>
+
+<footer class="black"> <h5>  </h5> </footer>
+
+</html>

@@ -1,0 +1,15 @@
+/*
+	Reading and writing to the database will be permitted upon successful
+	user athentication.
+*/
+
+{
+  "rules": {
+    "users": {
+      "$user": {
+        ".read": "auth.uid === $user",
+        ".write": "auth.uid === $user"
+      }
+    }
+  }
+}

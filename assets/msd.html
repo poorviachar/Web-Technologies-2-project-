@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<title>Planner Home</title>
+<meta charset="UTF-8">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/fonts2.css">
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.myLink {display: none}
+</style>
+<body onload="init()" class="w3-light-grey">
+
+<!-- Navigation Bar -->
+<div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+  <a href="#" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-map-marker w3-margin-right"></i>Logo</b></a>
+  <a href="#" class="w3-bar-item w3-button w3-right w3-hover-red w3-text-grey"><i class="fa fa-search"></i></a>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+  <img class="w3-image" src="images/bg.jpeg" alt="London" width="1500" height="700">
+  <div class="w3-display-middle" style="width:65%">
+      <div>
+    <div class="w3-bar w3-black">
+      <button class="w3-button tablink" onclick="openLink(event, 'Flight');"><i class="fa w3-margin-right"></i></button>
+      </div>
+      <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
+        <h3 align="center">Hit the road!</h3>
+        <div class="w3-row-padding">
+        </div>
+        <p align="center"><a href="tripPlanner.html"><button class="w3-button w3-dark-grey">Click here</button></a></p>
+      </div>
+      </div>
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px;">
+  <div id="about" class="w3-container w3-margin-top">
+
+  </div>
+  <!-- Good offers -->
+  <div class="w3-container w3-margin-top">
+    <h3>Trending Destinations</h3>
+    <h6>Here are some suggestions</h6>
+  </div>
+  <div id="picture1" class="w3-row-padding w3-text-white w3-large">
+    <div class="w3-half w3-margin-bottom">
+      <div id="one" class="w3-display-container">
+          <!--<img src="images/up.jpeg" alt="Udaipur" style="width:95%">-->
+          <span class="w3-display-bottomleft w3-padding">Udaipur</span>
+      </div>
+    </div>
+    <div class="w3-half">
+      <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half w3-margin-bottom">
+          <div id="two" class="w3-display-container">
+            <!--<img src="images/vs.jpeg" alt="Vidhana Soudha" style="width:100%">-->
+            <span class="w3-display-bottomleft w3-padding">Vidhana Soudha</span>
+          </div>
+        </div>
+        <div class="w3-half w3-margin-bottom">
+          <div id="three" class="w3-display-container">
+            <!--<img src="images/md.jpeg" alt="Marine Drive" style="width:100%">-->
+            <span class="w3-display-bottomleft w3-padding">Marine Drive</span>
+          </div>
+        </div>
+      </div>
+      <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half w3-margin-bottom">
+          <div id="four" class="w3-display-container">
+            <!--<img src="images/leh.jpeg" alt="Leh" style="width:100%">-->
+            <span class="w3-display-bottomleft w3-padding">Leh</span>
+          </div>
+        </div>
+        <div class="w3-half w3-margin-bottom">
+          <div id="five" class="w3-display-container">
+              <!--<img src="images/tm.jpeg" alt="Taj Mahal" style="width:100%">-->
+              <span class="w3-display-bottomleft w3-padding">Taj Mahal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Explore Nature -->
+  <div class="w3-container">
+    <h3>Customer Reviews</h3>
+    <p>See what people have said.</p>
+  </div>
+  <div id="picture2" class="w3-row-padding">
+    <div id="six" class="w3-half w3-margin-bottom">
+      <!--<img src="images/pc.jpeg" alt="Pondicherry" style="width:95%">-->
+      <div class="w3-container w3-white">
+        <h3>French Colony, Pondicherry</h3>
+        <p class="w3-opacity">Such a great trip!</p>
+        <!--<p>I feel the design and architecture stand out from its counterparts. The restaurants offers a wide variety of food items with phenomenal quality and laudable services. Overall a pleasant experience.</p>-->
+      </div>
+    </div>
+    <div  id="seven" class="w3-half w3-margin-bottom">
+      <!--<img src="images/mn.jpeg" alt="Manali" style="width:100%">-->
+      <div class="w3-container w3-white">
+        <h3>Manali, Himachal Pradesh</h3>
+        <p class="w3-opacity">Perfect family vacation</p>
+        <!--<p>I recently visited Manali with my family and I haven't come across a more scenic place. According to me, November is the best time to go. Try the adventure sports. We went for river rafting, paragliding and ice skating, and we thoroughly enjoyed it!<p>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div align="center" id="links">
+<a href="tripPlanner.html"><button class="w3-button w3-margin-bottom">Go to Planner</button></a>
+</div>
+
+<script>
+// Tabs
+function openLink(evt, linkName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("myLink");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(linkName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+
+// Click on the first tablink on load
+document.getElementsByClassName("tablink")[0].click();
+
+function init(){
+  xhr = new XMLHttpRequest();
+  if(xhr)
+  {
+    xhr.onreadystatechange=getContent;
+    xhr.open("GET", "con.txt", true);
+    xhr.send();
+  }
+}
+function getContent(){
+  if(xhr.readyState=="4"&&xhr.status==200){
+    var arr=xhr.responseText.split(";");
+    document.getElementById("about").innerHTML=arr[0];
+    document.getElementById("one").innerHTML=arr[1];
+    document.getElementById("two").innerHTML=arr[1];
+    document.getElementById("three").innerHTML=arr[1];
+    document.getElementById("four").innerHTML=arr[1];
+    document.getElementById("five").innerHTML=arr[1];
+    document.getElementById("six").innerHTML=arr[1];
+    document.getElementById("seven").innerHTML=arr[1];
+    setTimeout(getPic, 4000);
+  }
+}
+
+
+function getPic(){
+  xhr.open("GET", "img.txt", true);
+  xhr.onreadystatechange = showImg;
+  xhr.send(null);
+}
+
+
+function showImg(){
+  if(xhr.readyState == 4 && xhr.status == 200)
+  {
+    res=xhr.responseText.split(";");
+    document.getElementById("one").innerHTML = res[0];
+    document.getElementById("two").innerHTML = res[1];
+    document.getElementById("three").innerHTML = res[2];
+    document.getElementById("four").innerHTML = res[3];
+    document.getElementById("five").innerHTML = res[4];
+    setTimeout(getPic2, 3000);
+  }
+}
+
+function getPic2(){
+  xhr.open("GET", "img.txt", true);
+  xhr.onreadystatechange = showImg2;
+  xhr.send(null);
+}
+
+
+function showImg2(){
+  if(xhr.readyState == 4 && xhr.status == 200)
+  {
+    res=xhr.responseText.split(";");
+    document.getElementById("six").innerHTML = res[5];
+    document.getElementById("seven").innerHTML = res[6];
+  }
+}/*
+function getAbout(){
+  xhr.open("GET", "con.txt", true);
+  xhr.onreadystatechange=showAbout;
+  xhr.send(null);
+}
+function showAbout()
+{
+  if(xhr.readyState==4 && xhr.status==200)
+  {
+    document.getElementById("about").innerHTML=xhr.responseText;
+  }
+  setTimeout(getPics, 2000);
+}*/
+</script>
+
+</body>
+</html>
