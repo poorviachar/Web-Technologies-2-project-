@@ -8,10 +8,6 @@ The goal of this project was to create a simple and user friendly road trip plan
 
 ## Application
 
-The final application can be found here:
-	
-[https://trip-planner-332e4.firebaseapp.com/](https://trip-planner-332e4.firebaseapp.com/)
-
 Please look around and save some trips to your personal account! Note the additional features that this application offers:
 
 * Mobile responsiveness
@@ -44,18 +40,9 @@ The list of technologies and tools used to complete this project is below.
 * [MyGasFeed](http://www.mygasfeed.com/keys/intro)
 * [Hotwire.com](http://developer.hotwire.com/)
 
-## Contributors
-
-* [Heather Seaman](https://github.com/seamanhd) - Front end, design, Hotwire API.
-* [James McHale](https://github.com/aaronjaymus) - Google Maps API, myGasFeed API, AJAX.
-* [Anya Derbakova](https://github.com/angrbrd) - Firebase authentication, database, deployment.
-
 ## Future Work
 
 Future features that are being considered for this application are integration with additional travel sources such as flight APIs to allow the user to compare the cost of flying as opposed to driving to their destination. Another feature that is being considered is integration with APIs providing information on specific attractions or restaurants around the destination point to allow for a complete trip planning experience.
 
-If you have any questions regarding this application or any of the code in this repository, please feel free to reach out to us or to open up an issue in this repository. 
-
 Happy traveling!
 
-Regards, *The Talented Tangelos*
